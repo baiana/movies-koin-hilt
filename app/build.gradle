@@ -19,14 +19,19 @@ android {
     }
 
     buildTypes {
+        debug {
+            buildConfigField("String", "API_TOKEN", api_token)
+        }
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
+
+        applicationVariants.all {
+            buildConfigField("String", "API_TOKEN", api_token)
+        }
     }
-    applicationVariants.all {
-        buildConfigField("String", "API_TOKEN", api_token)
-    }
+
 }
 
 dependencies {

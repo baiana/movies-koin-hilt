@@ -1,4 +1,4 @@
-package com.baiana.simplemovies.network
+package com.baiana.simplemovies.util
 
 sealed class CallResponse<out T> {
     class Success<out T>(val result: T) : CallResponse<T>()
