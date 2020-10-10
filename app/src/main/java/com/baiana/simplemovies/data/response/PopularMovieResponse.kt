@@ -9,6 +9,5 @@ data class PopularMovieResponse(
     val totalPages: Int,
     @Json(name = "page")
     val currentPage: Int,
-    val results: PopularMovieBodyResponse
-
+    val results: List<PopularMovieResult>
 )
