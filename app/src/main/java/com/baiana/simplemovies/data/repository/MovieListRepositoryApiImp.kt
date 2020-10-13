@@ -1,9 +1,9 @@
 package com.baiana.simplemovies.data.repository
 
 import com.baiana.simplemovies.data.response.PopularMovieResponse
-import com.baiana.simplemovies.data.response.PopularMovieResult
 import com.baiana.simplemovies.network.MoviesService
-import com.baiana.simplemovies.util.CallResponse
+import com.baiana.simplemovies.data.model.CallResponse
+import com.baiana.simplemovies.data.model.ErrorModel
 
 class MovieListRepositoryApiImp(private val api: MoviesService) : MovieListRepository {
 
@@ -12,7 +12,7 @@ class MovieListRepositoryApiImp(private val api: MoviesService) : MovieListRepos
             return@getPopularMovies if (isSuccessful && body() != null) {
                 CallResponse.Success(body()!!)
             } else {
-                CallResponse.Failure(code().toString() + message())
+                CallResponse.Failure(ErrorModel(code(), message()))
             }
         }
     }
@@ -22,7 +22,7 @@ class MovieListRepositoryApiImp(private val api: MoviesService) : MovieListRepos
             return@getPopularMoviesPaginated if (isSuccessful && body() != null) {
                 CallResponse.Success(body()!!)
             } else {
-                CallResponse.Failure(code().toString() + message())
+                CallResponse.Failure(ErrorModel(code(), message()))
             }
         }
     }

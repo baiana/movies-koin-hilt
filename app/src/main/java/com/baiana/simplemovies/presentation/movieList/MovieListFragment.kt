@@ -6,14 +6,17 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
+import androidx.navigation.findNavController
 import com.baiana.simplemovies.R
 import com.baiana.simplemovies.data.model.Movie
-import com.baiana.simplemovies.presentation.MovieListViewModel
+import com.baiana.simplemovies.presentation.MoviesViewModel
+import com.baiana.simplemovies.presentation.movieList.MoviesRecyclerAdapter.*
 import kotlinx.android.synthetic.main.movie_list_fragment.*
 
 class MovieListFragment : Fragment() {
 
-    private lateinit var viewModel: MovieListViewModel
+    private lateinit var viewModel: MoviesViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -24,14 +27,30 @@ class MovieListFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProviders.of(this).get(MovieListViewModel::class.java)
+        viewModel = ViewModelProviders.of(this).get(MoviesViewModel::class.java)
         // TODO: Use the ViewModel
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        //setupRecyclerView()
+    }
+
+    private fun openDetailsScreen(item: Movie) {
+        val bundle = bundleOf("movieItem" to item)
+        view?.findNavController()?.navigate(R.id.openDetails, bundle)
     }
 
     private fun setupRecyclerView(list: ArrayList<Movie>) {
         moviesRV?.apply {
             if (adapter == null) {
-                adapter = MoviesRecyclerAdapter(list, resources)
+                adapter = MoviesRecyclerAdapter(list, resources).apply {
+                    detailsClickListener = object : OnMovieClickListener {
+                        override fun onClick(item: Movie) {
+                            openDetailsScreen(item)
+                        }
+                    }
+                }
             } else {
                 (adapter as MoviesRecyclerAdapter).swap(list)
             }
