@@ -8,28 +8,26 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.os.bundleOf
+import androidx.fragment.app.viewModels
+
 import androidx.navigation.findNavController
 import com.baiana.simplemovies.R
 import com.baiana.simplemovies.data.model.Movie
 import com.baiana.simplemovies.presentation.MoviesViewModel
 import com.baiana.simplemovies.presentation.movieList.MoviesRecyclerAdapter.*
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.movie_list_fragment.*
 
+@AndroidEntryPoint
 class MovieListFragment : Fragment() {
 
-    private lateinit var viewModel: MoviesViewModel
+    private val viewModel: MoviesViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         return inflater.inflate(R.layout.movie_list_fragment, container, false)
-    }
-
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProviders.of(this).get(MoviesViewModel::class.java)
-        // TODO: Use the ViewModel
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

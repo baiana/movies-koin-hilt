@@ -1,5 +1,6 @@
 package com.baiana.simplemovies.presentation
 
+import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.baiana.simplemovies.data.model.*
@@ -8,6 +9,8 @@ import com.baiana.simplemovies.data.model.CallResponse.*
 import com.baiana.simplemovies.util.SingleLiveEvent
 import com.baiana.simplemovies.util.convertToMovieModelList
 import kotlinx.coroutines.launch
+import javax.inject.Inject
+import javax.inject.Singleton
 
 class MoviesViewModel(private val api: MovieListRepository) : ViewModel() {
 
@@ -23,8 +26,8 @@ class MoviesViewModel(private val api: MovieListRepository) : ViewModel() {
         viewModelScope.launch {
             val response = api.getPopularMovies()
             if (response is Success) {
-                val convertedList = response.result.results.convertToMovieModelList()
-                displayList(convertedList)
+                val convertedList = response.result.results?.convertToMovieModelList()
+                displayList(convertedList!!)
             } else if (response is Failure) {
                 handleError(response.error)
             }

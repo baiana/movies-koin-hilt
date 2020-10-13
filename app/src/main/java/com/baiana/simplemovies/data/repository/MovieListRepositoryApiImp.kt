@@ -4,8 +4,12 @@ import com.baiana.simplemovies.data.response.PopularMovieResponse
 import com.baiana.simplemovies.network.MoviesService
 import com.baiana.simplemovies.data.model.CallResponse
 import com.baiana.simplemovies.data.model.ErrorModel
+import dagger.Provides
+import javax.inject.Inject
+import javax.inject.Singleton
 
-class MovieListRepositoryApiImp(private val api: MoviesService) : MovieListRepository {
+
+class MovieListRepositoryApiImp @Inject constructor(private val api: MoviesService) : MovieListRepository {
 
     override suspend fun getPopularMovies(): CallResponse<PopularMovieResponse> {
         with(api.getPopularMovies()) {

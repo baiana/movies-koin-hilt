@@ -11,6 +11,15 @@ android {
         enabled = true
     }
 
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    kotlinOptions {
+        jvmTarget = JavaVersion.VERSION_1_8.toString()
+    }
+
     defaultConfig {
         applicationId "com.baiana.simplemovies"
         minSdkVersion 24
@@ -23,6 +32,8 @@ android {
 
     buildTypes {
         debug {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
             buildConfigField("String", "API_TOKEN", api_token)
         }
         release {
@@ -71,6 +82,9 @@ dependencies {
     def retrofit_version = '2.9.0'
     implementation "com.squareup.retrofit2:retrofit:$retrofit_version"
     implementation "com.squareup.retrofit2:converter-moshi:$retrofit_version"
+    implementation 'com.squareup.okhttp3:okhttp:4.9.0'
+    implementation 'com.squareup.moshi:moshi:1.9.3'
+    kapt 'com.squareup.moshi:moshi-kotlin-codegen:1.9.3'
 
     // Glide (Image loading)
     def glide_version = '4.11.0'
