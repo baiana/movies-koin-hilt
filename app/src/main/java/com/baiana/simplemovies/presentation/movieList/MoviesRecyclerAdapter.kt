@@ -25,7 +25,6 @@ class MoviesRecyclerAdapter(private var list: ArrayList<Movie>, val resources: R
 
     override fun getItemCount() = list.count()
 
-
     class ItemHolder(private val binding: MovieListItemBinding, private val resources: Resources) :
         RecyclerView.ViewHolder(binding.root) {
 

@@ -6,7 +6,7 @@ import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 import kotlinx.android.parcel.Parcelize
 
-@Parcelize
+
 @JsonClass(generateAdapter = true)
 data class PopularMovieResult(
     val id: Int,
@@ -18,7 +18,7 @@ data class PopularMovieResult(
     val posterUrl: String,
     @Json(name = "backdrop_path")
     val backdropUrl: String
-) : Parcelable {
+)  {
     fun getCompletePosterUrl() = Constants.BASE_PICTURE_URL + posterUrl
     fun getCompleteBackdropUrl() = Constants.BASE_PICTURE_URL + backdropUrl
 
