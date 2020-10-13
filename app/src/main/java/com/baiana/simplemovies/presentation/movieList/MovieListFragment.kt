@@ -7,13 +7,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.baiana.simplemovies.R
+import com.baiana.simplemovies.data.model.Movie
 import com.baiana.simplemovies.presentation.MovieListViewModel
+import kotlinx.android.synthetic.main.movie_list_fragment.*
 
 class MovieListFragment : Fragment() {
-
-    companion object {
-        fun newInstance() = MovieListFragment()
-    }
 
     private lateinit var viewModel: MovieListViewModel
 
@@ -28,6 +26,16 @@ class MovieListFragment : Fragment() {
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProviders.of(this).get(MovieListViewModel::class.java)
         // TODO: Use the ViewModel
+    }
+
+    private fun setupRecyclerView(list: ArrayList<Movie>) {
+        moviesRV?.apply {
+            if (adapter == null) {
+                adapter = MoviesRecyclerAdapter(list, resources)
+            } else {
+                (adapter as MoviesRecyclerAdapter).swap(list)
+            }
+        }
     }
 
 }
