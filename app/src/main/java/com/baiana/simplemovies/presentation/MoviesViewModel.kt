@@ -12,7 +12,7 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 import javax.inject.Singleton
 
-class MoviesViewModel(private val api: MovieListRepository) : ViewModel() {
+class MoviesViewModel @ViewModelInject constructor(private val api: MovieListRepository) : ViewModel() {
 
     private val _viewState = SingleLiveEvent<MoviesViewState>()
     val viewState get() = _viewState
