@@ -12,6 +12,7 @@
         tools:layout="@layout/movie_list_fragment">
         <action
             android:id="@+id/action_movieListFragment_to_movieDetailsFragment"
+            android:id="@+id/openDetails"
             app:destination="@id/movieDetailsFragment" />
     </fragment>
 
@@ -22,6 +23,7 @@
         tools:layout="@layout/fragment_movie_detail">
         <action
             android:id="@+id/openDetails"
+            android:id="@+id/backToList"
             app:destination="@id/movieListFragment" />
         <argument
             android:name="movieItem"
