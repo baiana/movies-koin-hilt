@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.core.os.bundleOf
 import androidx.navigation.findNavController
 import com.baiana.simplemovies.R
@@ -33,7 +34,35 @@ class MovieListFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        //setupRecyclerView()
+        setupObservables()
+    }
+
+    private fun setupObservables() {
+        viewModel.viewState.observe(this) {
+            when {
+                it.movieList != null && it.movieList.isNotEmpty() -> {
+                    setupRecyclerView(it.movieList)
+                }
+                it.errorId != null || it.errorMessage != null -> {
+                    handleError(it.errorId, it.errorMessage)
+                }
+            }
+            handleLoading(it.isLoading)
+        }
+        viewModel.getMovieList()
+    }
+
+    private fun handleLoading(isLoading: Boolean) {
+        progressPB.visibility = if (isLoading) View.VISIBLE else View.GONE
+
+    }
+
+    private fun handleError(errorId: Int?, errorMessage: String?) {
+        Toast.makeText(
+            context,
+            errorMessage ?: resources.getString(errorId ?: R.string.default_error),
+            Toast.LENGTH_SHORT
+        ).show()
     }
 
     private fun openDetailsScreen(item: Movie) {
