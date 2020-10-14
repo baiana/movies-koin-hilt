@@ -9,7 +9,7 @@ import com.baiana.simplemovies.util.SingleLiveEvent
 import com.baiana.simplemovies.util.convertToMovieModelList
 import kotlinx.coroutines.launch
 
-class MoviesViewModel @ViewModelInject constructor(private val api: MovieListRepository) : ViewModel() {
+class MoviesViewModel(private val api: MovieListRepository) : ViewModel() {
 
     private val _viewState = SingleLiveEvent<MoviesViewState>()
     val viewState get() = _viewState
@@ -23,8 +23,9 @@ class MoviesViewModel @ViewModelInject constructor(private val api: MovieListRep
         viewModelScope.launch {
             val response = api.getPopularMovies()
             if (response is Success) {
-                val convertedList = response.result.results.convertToMovieModelList()
-                displayList(convertedList)
+                response.result.results?.convertToMovieModelList()?.apply {
+                    displayList(this)
+                }
             } else if (response is Failure) {
                 handleError(response.error)
             }
