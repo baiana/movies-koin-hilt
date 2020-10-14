@@ -6,6 +6,7 @@ Alguns links de referência utilizados para estudo na implementação do Hilt, p
 
  - [Documentação Dagger Hilt](https://dagger.dev/hilt/)
  - [Codelab Hilt](https://codelabs.developers.google.com/codelabs/android-hilt/#2)
+ - [Hilt and Dagger annotations cheat sheet](https://developer.android.com/images/training/dependency-injection/hilt-annotations.pdf)
  - [Documentação Android - Injeção de dependência com Hilt](https://developer.android.com/training/dependency-injection/hilt-android?hl=pt-br) [PT-BR]
  - [Medium - Finally, a loveable dependency injection for Android: Hilt & Koin](https://medium.com/@genc.tasbasi/finally-a-loveable-dependency-injection-for-android-hilt-koin-6cdfc08a6401) 
 - [Medium -  Android Architecture: Hilt, MVVM, Kotlin Coroutines, Live Data, Room and Retrofit](https://itnext.io/android-architecture-hilt-mvvm-kotlin-coroutines-live-data-room-and-retrofit-ft-8b746cab4a06)
