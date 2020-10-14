@@ -1,6 +1,5 @@
 package com.baiana.simplemovies.presentation.movieList
 
-import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -14,10 +13,11 @@ import com.baiana.simplemovies.data.model.Movie
 import com.baiana.simplemovies.presentation.MoviesViewModel
 import com.baiana.simplemovies.presentation.movieList.MoviesRecyclerAdapter.*
 import kotlinx.android.synthetic.main.movie_list_fragment.*
+import org.koin.androidx.viewmodel.compat.ViewModelCompat.viewModel
 
 class MovieListFragment : Fragment() {
 
-    private lateinit var viewModel: MoviesViewModel
+    private val viewModel: MoviesViewModel by viewModel(this, MoviesViewModel::class.java)
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -26,11 +26,7 @@ class MovieListFragment : Fragment() {
         return inflater.inflate(R.layout.movie_list_fragment, container, false)
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProviders.of(this).get(MoviesViewModel::class.java)
-        // TODO: Use the ViewModel
-    }
+
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -40,13 +36,10 @@ class MovieListFragment : Fragment() {
     private fun setupObservables() {
         viewModel.viewState.observe(this) {
             when {
-                it.movieList != null && it.movieList.isNotEmpty() -> {
-                    setupRecyclerView(it.movieList)
-                }
-                it.errorId != null || it.errorMessage != null -> {
-                    handleError(it.errorId, it.errorMessage)
-                }
+                it.movieList != null && it.movieList.isNotEmpty() -> { setupRecyclerView(it.movieList) }
+                it.errorId != null || it.errorMessage != null -> { handleError(it.errorId, it.errorMessage) }
             }
+
             handleLoading(it.isLoading)
         }
         viewModel.getMovieList()

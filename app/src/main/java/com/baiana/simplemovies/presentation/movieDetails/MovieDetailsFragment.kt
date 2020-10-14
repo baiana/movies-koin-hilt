@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
+import com.baiana.simplemovies.R
 import com.baiana.simplemovies.data.model.Movie
 import com.baiana.simplemovies.databinding.FragmentMovieDetailBinding
 import com.baiana.simplemovies.util.loadWithGlide
@@ -20,13 +21,10 @@ class MovieDetailsFragment : Fragment() {
         this.arguments?.getParcelable<Movie>("movieItem")
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        binding.backBTN.setOnClickListener { returnToMain() }
         movie?.apply { displayMovieDetails(this) } ?: returnToMain()
     }
 
@@ -37,7 +35,7 @@ class MovieDetailsFragment : Fragment() {
     ) = binding.root
 
     private fun returnToMain() {
-        findNavController().popBackStack()
+        findNavController().navigate(R.id.backToList)
         arguments = null
     }
 

@@ -23,8 +23,9 @@ class MoviesViewModel(private val api: MovieListRepository) : ViewModel() {
         viewModelScope.launch {
             val response = api.getPopularMovies()
             if (response is Success) {
-                val convertedList = response.result.results.convertToMovieModelList()
-                displayList(convertedList)
+                response.result.results?.convertToMovieModelList()?.apply {
+                    displayList(this)
+                }
             } else if (response is Failure) {
                 handleError(response.error)
             }
