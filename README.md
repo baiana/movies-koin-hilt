@@ -6,6 +6,7 @@ As implementações podem ser encontradas nas branches [DI/hilt](https://github.
  
 ## Outras tecnologias utilizadas:
  -  Coroutines 
+ - API TMDB [(documentação)](https://www.themoviedb.org/documentation/api)
  - MVVM 
  - Navigation 
  - Glide 
