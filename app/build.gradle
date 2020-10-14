@@ -71,8 +71,8 @@ dependencies {
     // Koin
     def koin_version = "2.1.6"
     implementation "org.koin:koin-android:$koin_version"
-    implementation  "org.koin:koin-androidx-viewmodel:$koin_version"
-
+    implementation "org.koin:koin-androidx-viewmodel:$koin_version"
+    testImplementation "org.koin:koin-test:2.1.5"
 
     // Retrofit
     def retrofit_version = '2.9.0'
@@ -91,7 +91,9 @@ dependencies {
     implementation "com.github.bumptech.glide:glide:$glide_version"
     annotationProcessor "com.github.bumptech.glide:compiler:$glide_version"
 
+    testImplementation 'androidx.arch.core:core-testing:2.1.0'
     testImplementation 'junit:junit:4.13'
+    testImplementation "io.mockk:mockk:1.10.0"
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
 
