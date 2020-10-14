@@ -9,7 +9,7 @@ import com.baiana.simplemovies.util.SingleLiveEvent
 import com.baiana.simplemovies.util.convertToMovieModelList
 import kotlinx.coroutines.launch
 
-class MoviesViewModel(private val api: MovieListRepository) : ViewModel() {
+class MoviesViewModel @ViewModelInject constructor(private val api: MovieListRepository) : ViewModel() {
 
     private val _viewState = SingleLiveEvent<MoviesViewState>()
     val viewState get() = _viewState
