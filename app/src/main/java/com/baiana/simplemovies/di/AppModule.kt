@@ -9,13 +9,12 @@ import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 import retrofit2.Retrofit
 
-val apiModule = module {
+val appModule = module {
     single<Retrofit> { RetrofitConfig.getInstance() }
-    factory<MoviesService> { RetrofitConfig.provideMoviesAPI(get()) }
+    single<MoviesService> { RetrofitConfig.provideMoviesAPI(get<Retrofit>()) }
+
+    factory<MovieListRepository> { MovieListRepositoryApiImp(get<MoviesService>()) }
+    viewModel { MoviesViewModel(get<MovieListRepository>()) }
 }
 
 
-val moviesListModule = module {
-    single<MovieListRepository> { MovieListRepositoryApiImp(get()) }
-    viewModel { MoviesViewModel(get()) }
-}

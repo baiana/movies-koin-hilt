@@ -7,7 +7,7 @@ import retrofit2.converter.moshi.MoshiConverterFactory
 
 object RetrofitConfig {
 
-    fun getInstance() =
+    fun getInstance(): Retrofit =
         Retrofit.Builder().baseUrl(Constants.BASE_URL)
             .addConverterFactory(MoshiConverterFactory.create())
             .build()

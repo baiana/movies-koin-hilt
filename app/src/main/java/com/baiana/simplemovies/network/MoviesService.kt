@@ -9,7 +9,7 @@ import retrofit2.http.Query
 
 interface MoviesService {
 
-    @GET("/movie/popular?api_key=${BuildConfig.API_TOKEN}&language=${Constants.LANGUAGE}")
+    @GET("popular?api_key=${BuildConfig.API_TOKEN}&language=${Constants.LANGUAGE}")
     suspend fun getPopularMovies(@Query("page") pageNumber: Int = 1): Response<PopularMovieResponse>
 
 
